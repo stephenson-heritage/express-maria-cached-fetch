@@ -5,13 +5,13 @@ const minExpire = 600;
 module.exports = class {
 	static async fetchUrl(url) {
 		let connection = await db.getConnection();
-		const rows = await connection.query("SELECT data,timestampdiff(minute,`date`,now()) as minDiff from cache where url like ? and timestampdiff(minute,`date`,now()) <= ? order by `date` desc limit 1;", [url, minExpire]);
+		const rows = await connection.query("SELECT data,timestampdiff(minute,`date`,now()) as age from cache where url like ? and timestampdiff(minute,`date`,now()) <= ? order by `date` desc limit 1;", [url, minExpire]);
 
         if (rows.length > 0) {
             connection.end();
-            let age = Number(rows[0].minDiff);
-            let diff = minExpire- Number(rows[0].minDiff);
-            console.log(diff);
+            let age = Number(rows[0].age);
+            let diff = minExpire- age;
+
            let data = JSON.parse(rows[0].data);
            data.cached = {age: age, expires: diff};
             return data;
