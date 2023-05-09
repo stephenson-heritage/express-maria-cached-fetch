@@ -1,0 +1,43 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#messages {
+  background-color: beige;
+  max-height: 60vh;
+  overflow-y: auto;
+  border: darkgray 2px inset;
+
+}
+
+#send_input{
+  display: flex;  
+
+}
+
+#message {
+  flex-grow: 5;
+}
+
+
+.chat_message {
+  padding: 0.5em 2px;
+}
+
+.me {
+  text-align: right;
+  color: blueviolet;
+}
